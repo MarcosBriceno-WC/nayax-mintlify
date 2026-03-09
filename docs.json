@@ -16,7 +16,7 @@
     "tabs": [
       {
         "tab": "Integrate POS Device",
-        "icon": "terminal",
+        "icon": "tablet-screen-button",
         "menu": [
           {
             "item": "Marshall",
@@ -94,8 +94,7 @@
                       "docs/integrate-pos-device/marshall/additional-resources/marshall-ontransferdata",
                       "docs/integrate-pos-device/marshall/additional-resources/stablity-issues",
                       "docs/integrate-pos-device/marshall/additional-resources/capabilities"
-                    ],
-                    "root": "docs/integrate-pos-device/marshall/additional-resources/marshall-additional-resources"
+                    ]
                   },
                   {
                     "group": "Marshall FAQs",
@@ -465,8 +464,7 @@
                       "docs/manage-data-operations/lynx-api/cards/retrieve-card-data",
                       "docs/manage-data-operations/lynx-api/cards/add-credit-to-card",
                       "reference/manage-data-operations/lynx-api/cards"
-                    ],
-                    "root": "docs/manage-data-operations/lynx-api/cards/managing-cards"
+                    ]
                   },
                   {
                     "group": "Refunds",
@@ -474,8 +472,7 @@
                       "docs/manage-data-operations/lynx-api/refunds/request-refunds",
                       "docs/manage-data-operations/lynx-api/refunds/approve-or-decline-a-refund",
                       "docs/manage-data-operations/lynx-api/refunds/upload-refund-document"
-                    ],
-                    "root": "docs/manage-data-operations/lynx-api/refunds/payments"
+                    ]
                   },
                   {
                     "group": "Operator",
@@ -485,8 +482,7 @@
                       "docs/manage-data-operations/lynx-api/operator/create-operator",
                       "docs/manage-data-operations/lynx-api/operator/operator-actions",
                       "reference/manage-data-operations/lynx-api/actor-types"
-                    ],
-                    "root": "docs/manage-data-operations/lynx-api/operator/index"
+                    ]
                   },
                   {
                     "group": "Machines",
@@ -499,8 +495,7 @@
                       "docs/manage-data-operations/lynx-api/machines/getting-a-machines-id-by-the-devices-serial-number",
                       "docs/manage-data-operations/lynx-api/machines/getting-a-machines-last-sales-ereceipt-information",
                       "reference/manage-data-operations/lynx-api/machine-types"
-                    ],
-                    "root": "docs/manage-data-operations/lynx-api/machines/machines-devices"
+                    ]
                   },
                   {
                     "group": "Devices",
@@ -508,8 +503,7 @@
                       "docs/manage-data-operations/lynx-api/devices/getting-all-devices-under-an-operator",
                       "docs/manage-data-operations/lynx-api/devices/disabling-a-device",
                       "docs/manage-data-operations/lynx-api/devices/moving-device-between-operators"
-                    ],
-                    "root": "docs/manage-data-operations/lynx-api/devices/devices-1"
+                    ]
                   },
                   {
                     "group": "Inventory Management",
@@ -520,8 +514,7 @@
                       "docs/manage-data-operations/lynx-api/inventory-management/machine-products-1",
                       "docs/manage-data-operations/lynx-api/inventory-management/pick-lists",
                       "docs/manage-data-operations/lynx-api/inventory-management/pick-list-actions"
-                    ],
-                    "root": "docs/manage-data-operations/lynx-api/inventory-management/index"
+                    ]
                   },
                   "reference/manage-data-operations/lynx-api/languages",
                   "docs/manage-data-operations/lynx-api/product-faqs",
@@ -753,15 +746,15 @@
         ]
       },
       {
-        "tab": "Help Center",
+        "tab": "Release Notes",
         "pages": [
-          "help"
+          "https://www.nayax.com/product-updates/integrated-pos/integrated-vpos-touch-onyx/"
         ]
       },
       {
-        "tab": "Changelog",
+        "tab": "Help Center",
         "pages": [
-          "changelog"
+          "https://nayax-u.nayax.com/"
         ]
       }
     ]
