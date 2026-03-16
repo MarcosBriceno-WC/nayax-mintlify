@@ -40,7 +40,7 @@ To validate an incoming notification, follow these four steps to recreate the si
     * **Output:** 32 raw bytes.
   </Step>
 
-  <Step title="Base64 encode">
+  <Step title="Encode as Base64">
     Encode the 32 output bytes as Base64. This is the value that appears in the `Hmac` field.
   </Step>
 </Steps>
@@ -87,7 +87,8 @@ This scenario demonstrates how to handle missing fields. Note that the separator
 :e84e9e10-6223-4e45-8da1-243d2d55b25e:1000968111:Auth:True
 ```
 <Note>  
-Because `NayaxTransactionId` is absent, the string begins with a colon. Never skip a field position. The algorithm expects exactly 5 positions separated by 4 colons.
+Because `NayaxTransactionId` is absent, the string begins with a colon. Never skip a field position. 
+The algorithm expects exactly 5 positions separated by 4 colons.
 </Note>
 
 **Expected Hmac**:
@@ -129,5 +130,5 @@ To enable this feature, complete the following administrative and security tasks
 * **Environment Separation:** Separate keys must be used for Production and Test/QA environments.
 
 <Warning>
-  **Important:** If HMAC validation fails on your end, do not return a `500` error. A broken HMAC implementation will not be fixed by retrying. Return a `401` instead.
+If HMAC validation fails on your end, do not return a `500` error. A broken HMAC implementation will not be fixed by retrying. Return a `401` instead.
 </Warning>
