@@ -46,26 +46,80 @@ To validate an incoming notification, follow these four steps to recreate the si
 </Steps>
 
 ## Signing String Examples
-Use the following scenarios to test your string concatenation logic against our standard format. All examples below use this *Test Key**:
+Use the following scenarios to verify your string concatenation logic.
+All examples use this test key:
 `a3f7c2e9d1b8456f0e3a7c9b2d4f6e8a1c3d5e7f9b0a2c4d6e8f0b1c3d5e7f90`
 
-### Example 1  Sale Notification
-* **NayaxTransactionId:** "20000121692"
-* **MerchantRequestId:** "5fbeb1ba-263f-4fe6-a109-642b562020c9"
-* **MachineId:** "1001316721"
-* **RequestType:** `0` → "Sale"
-* **IsApproved:** `true` → "True"
+### Example 1  Sale Notification (`NayaxTransactionId` present)
+Use the following table to verify how raw notification values are transformed into the signing string:
 
-**Signing string:** `20000121692:5fbeb1ba-263f-4fe6-a109-642b562020c9:1001316721:Sale:True`
+| Field | Value in notification | Value used in signing string |
+| :--- | :--- | :--- |
+| **NayaxTransactionId** | `"20000121692"` | `20000121692` |
+| **MerchantRequestId** | `"5fbeb1ba-263f-4fe6-a109-642b562020c9"` | `5fbeb1ba-263f-4fe6-a109-642b562020c9` |
+| **MachineId** | `"1001316721"` | `1001316721` |
+| **RequestType** | `0` (integer) | `Sale` (enum name) |
+| **IsApproved** | `true` (boolean) | `True` (capital T) |
 
-### Example 2  Auth Request (Transaction ID absent)
-* **NayaxTransactionId:** (absent) → ""
-* **MerchantRequestId:** "e84e9e10-6223-4e45-8da1-243d2d55b25e"
-* **MachineId:** "1000968111"
-* **RequestType:** `1` → "Auth"
-* **IsApproved:** `true` → "True"
+**Signing string:** 
+```
+20000121692:5fbeb1ba-263f-4fe6-a109-642b562020c9:1001316721:Sale:True
+```
 
-**Signing string:** `:e84e9e10-6223-4e45-8da1-243d2d55b25e:1000968111:Auth:True`
+**Expected Hmac**:
+```
+uET4OAwxvSN6lwVEwzQ1qRWbMkxo4KR9JbUIcG0qqo0=
+```
+
+### Example 2  Auth Request (`NayaxTransactionId` absent)
+This scenario demonstrates how to handle missing fields. Note that the separator is still required even if the first field is empty.
+
+| Field | Value in notification | Value used in signing string |
+| :--- | :--- | :--- |
+| **NayaxTransactionId** | (field absent) | (empty string — position kept) |
+| **MerchantRequestId** | `"e84e9e10-6223-4e45-8da1-243d2d55b25e"` | `e84e9e10-6223-4e45-8da1-243d2d55b25e` |
+| **MachineId** | `"1000968111"` | `1000968111` |
+| **RequestType** | `1` (integer) | `Auth` (enum name) |
+| **IsApproved** | `true` (boolean) | `True` (capital T) |
+
+**Signing string:** 
+```
+:e84e9e10-6223-4e45-8da1-243d2d55b25e:1000968111:Auth:True
+```
+<Note>  
+Because `NayaxTransactionId` is absent, the string begins with a colon. Never skip a field position. The algorithm expects exactly 5 positions separated by 4 colons.
+</Note>
+
+**Expected Hmac**:
+```
+D4Ni+IqJev32uHlNPzz6oW8AFiGyZq7kQ8xh3QyLy8g=
+```
+## Validating on Your End
+1. Receive the POST notification from Nayax.
+2. Extract these 5 fields from the notification body:
+   `NayaxTransactionId`, `MerchantRequestId`, `MachineId`, `RequestType`, `IsApproved`.
+3. Build the signing string using the same rules as Step 1 above.
+4. Decode your secret key from 64 hex characters to 32 raw bytes.
+5. Run HMAC-SHA256 using the signing string (UTF-8 encoded) as input and the 32 bytes as the key.
+6. Base64-encode the 32-byte output.
+7. Compare your result to the `Hmac` field in the notification.
+
+### Validation Outcomes
+Once you compare your generated HMAC with the one provided in the notification, follow these actions:
+
+| Result | Action |
+| :--- | :--- |
+| **Match** | Notification is authentic. Process the request. |
+| **No match** | Potential tampering or misconfiguration. **Reject** and do not process. |
+
+#### HTTP Response Codes
+* **Return 200:** On success.
+* **Return 401:** For HMAC failures. This is intentional. Nayax will not retry on a 401. 
+* **Return 500:** Only if your server has a temporary internal error. Nayax will retry up to 3 times.
+
+<Note>
+If your HMAC implementation is incorrect during development, retrying will not help. Fix the implementation and test using the examples on this page.
+</Note>
 
 ## One-Time Setup
 To enable this feature, complete the following administrative and security tasks:

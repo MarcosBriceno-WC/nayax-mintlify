@@ -59,21 +59,51 @@
     1px 0 0 #604aa2;
 }
 
-/* fix footer link truncation */
-footer a.md\:truncate {
-  max-width: none;
-  text-overflow: unset;
-  white-space: nowrap;
-  overflow: visible;
+/* --- Footer fix (AI generated) --- */
+
+/* 1. Logo Surgical Strike: Hides the dark-mode logo while in light mode (and vice versa) */
+/* We target the specific logo classes Mintlify uses for theme switching */
+footer .dark\:hidden, 
+footer .hidden.dark\:block {
+  display: none !important;
 }
 
-footer div:has(> a.md\:truncate) {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, auto));
-  justify-content: center;
-  gap: 0.75rem 2rem;
+/* Force only the currently active theme logo to show */
+footer .block.dark\:hidden,
+footer .hidden.dark\:block.active { /* Standard Mintlify logic */
+  display: block !important;
 }
-/* end */
+
+/* 2. Layout: Logo Left, Links Right, ONE LINE */
+footer .max-w-7xl > .flex {
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  width: 100% !important;
+}
+
+/* 3. The Link Container: Prevent wrapping at all costs */
+footer div:has(> a.md\:truncate) {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 1.5rem !important;
+  margin-left: auto !important;
+}
+
+/* 4. The Links: No squishing, no hiding */
+footer a.md\:truncate {
+  max-width: none !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+/* 5. Clean up the extra header */
+footer h2 {
+  display: none !important;
+}
+/* --- End of Footer fix --- */
 
 /* move last 2 navbar tabs to the right side */
 .nav-tabs {

@@ -38,6 +38,18 @@ export const IntegratePOS = () => {
     </svg>
   );
 
+  const FuelPumpIcon = () => (
+  <svg width="46" height="48" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path 
+      d="M34.5 13.5V33.5C34.5 35.1569 33.1569 36.5 31.5 36.5H12.5C10.8431 36.5 9.5 35.1569 9.5 33.5V10.5C9.5 8.84315 10.8431 7.5 12.5 7.5H27.5M34.5 13.5L38.5 17.5V26.5C38.5 28.7091 40.2909 30.5 42.5 30.5V30.5M34.5 13.5H31.5C29.2909 13.5 27.5 11.7091 27.5 9.5V7.5M27.5 7.5V16.5H9.5M20.5 22.5H16.5M31.5 40.5H12.5" 
+      stroke="#FFCD00" 
+      strokeWidth="3" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
   const UnattendedDeviceIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="46" height="54" viewBox="0 0 46 54" fill="none">
       <circle cx="23" cy="30.1836" r="23" fill-opacity="0.8" />
@@ -215,7 +227,7 @@ export const IntegratePOS = () => {
       comingSoon: false,
     },
         {
-      icon: <UnattendedDeviceIcon/>,
+      icon: <FuelPumpIcon/>,
       title: "Fuel & Forecourt Solutions",
       arrow: "Marshall Pro (Fuel)",
       description:

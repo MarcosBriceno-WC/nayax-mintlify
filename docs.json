@@ -1,5 +1,10 @@
 {
   "$schema": "https://mintlify.com/docs.json",
+  "api": {
+    "playground": {
+      "display": "none"
+    }
+  },
   "theme": "mint",
   "name": "Nayax Developer Portal",
   "colors": {
@@ -373,7 +378,6 @@
                     ],
                     "root": "docs/integrate-pos-device/spark/payment-flows/transaction-flows-spark"
                   },
-                  "docs/integrate-pos-device/spark/spark-api-link",
                   {
                     "group": "Webhook Callbacks",
                     "pages": [
@@ -748,16 +752,12 @@
       {
         "tab": "Release Notes",
         "icon": "newspaper",
-        "pages": [
-          "https://www.nayax.com/product-updates/integrated-pos/integrated-vpos-touch-onyx/"
-        ]
+        "href": "https://www.nayax.com/product-updates/integrated-pos/integrated-vpos-touch-onyx/"
       },
       {
         "tab": "Help Center",
         "icon": "circle-question",
-        "pages": [
-          "https://nayax-u.nayax.com/"
-        ]
+        "href": "https://nayax-u.nayax.com/"
       }
     ]
   },
@@ -2042,11 +2042,7 @@
           },
           {
             "label": "Terms of Use",
-            "href": "https://www.nayax.com/terms-conditions/"
-          },
-          {
-            "label": "Quality Policy",
-            "href": "/legal/quality-policy"
+            "href": "/docs/get-started/terms-of-service"
           },
           {
             "label": "Code of Ethics",
